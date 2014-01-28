@@ -1,6 +1,8 @@
 #ifndef _NBODY_SIMULATION_H
 #define _NBODY_SIMULATION_H
 
+#include <nbody/Integrator.h>
+#include <nbody/SimpleIntegrator.h>
 #include <nbody/System.h>
 
 #include <iosfwd>
@@ -16,7 +18,7 @@ namespace nbody {
     std::string generateName();
   public:
     Simulation() : _system{nullptr}, _name{ generateName() } {}
-    Simulation( std::istream &input ) : _system{new System(input)}, _name{ generateName() } {}
+    Simulation( std::istream &input ) : _system{new System(input, SimpleIntegrator())}, _name{ generateName() } {}
     void evolveSystem( int nSteps, float dt );
     void loadRun( std::istream &input );
     void saveRun() const;
