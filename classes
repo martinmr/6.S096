@@ -1,0 +1,50 @@
+Simulation
+	members:
+		System* _system;
+		double _timestep; (milliseconds)
+		Integrator _integrator
+
+	methods:
+		void loadRun(std::istream &in)
+		void evolveSystemFor( float time )
+		void saveRun( std::ostream &os ) const
+
+InvalidInput (exception)
+
+System
+	members:
+		vector* _bodies 
+		int _nbodies
+	
+	method:
+		void addBody(Body* body)
+		void removeBody(size_t index)
+		Body& body(size_t index)
+		Body body(size_t index) const
+		
+
+Body
+	vector3d* _pos;
+	vector3d* _acc;
+	vector3d* _vel;
+	unsigned double mass;
+	//shape
+
+	void reverseMomentum();
+	//getters and setters for members
+
+Integrator
+	
+	method:
+		virtual System* integrate(const System *system, const double dt) const
+
+
+SimpleIntegrator : Integrator 
+
+
+Renderer
+	members:
+		Vector<double> _boundaries
+
+	methods:
+		display(System *system);
