@@ -26,6 +26,48 @@ namespace nbody {
         return _dampingFactor;
     }
 
+    float System::KineticEnergy() const {
+      float K = 0;
+      Vector3f v;
+      for( size_t i = 0; i < _nBodies; i++ ) {
+       // kinE += _body[i].KineticEnergy();
+        v = _body[i].velocity();
+        K += _body[i].mass() * v.normsq() / 2.0f;
+      }
+      return K;
+    }
+
+    float System::PotentialEnergy() const {
+      float U = 0.0f;
+      Vector3f r;
+      for( size_t i = 0; i < _nBodies - 1; i++ ) {
+        for (size_t j = i + 1; j < _nBodies; j++ ) { 
+          r = _body[i].position() - _body[j].position();
+          U -= NEWTON_G * _body[i].mass() * _body[j].mass()/r.norm();
+        }
+      }
+      return U;
+    }
+    float System::TotalEnergy() const {
+      return KineticEnergy() + PotentialEnergy();
+    }
+
+    Vector3f System::Momentum() const {
+      auto p = Vector3f( 0.0, 0.0, 0.0 );
+      for( size_t i = 0; i < _nBodies; i++ ) {
+        p = p + _body[i].mass() * _body[i].velocity();
+      }
+      return p;
+    }
+
+    Vector3f System::AngularMomentum() const {
+      auto L = Vector3f( 0.0, 0.0, 0.0 );
+      for( size_t i = 0; i < _nBodies; i++ ) {
+        L = L + _body[i].mass() * cross( _body[i].position(), _body[i].velocity() );
+      }
+      return L;
+    }
+
     inline void System::interactBodies( size_t i, size_t j, float softFactor, Vector3f &acc ) const {
         Vector3f r = _body[j].position() - _body[i].position();
         float distance = r.norm() + softFactor;

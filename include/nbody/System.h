@@ -14,8 +14,10 @@ namespace nbody {
         size_t _nBodies;
         Body *_body;
         Integrator _integrator;
+
         float _softFactor = 1e-9f;
         float _dampingFactor = 1.0f;
+
         System() = delete;
         System( const System &sys ) = delete;
         System& operator=( const System &sys ) = delete;
@@ -27,7 +29,14 @@ namespace nbody {
 
         Body& body( size_t index );
         Body body( size_t index ) const;
-
+        
+        // physical characteristics of the system
+        float KineticEnergy() const;
+        float PotentialEnergy() const;
+        float TotalEnergy() const;
+        Vector3f Momentum() const;
+        Vector3f AngularMomentum() const;
+        
         size_t nBodies() const;
         float dampingFactor() const;
         void interactBodies( size_t i, size_t j, float softFactor, Vector3f &acc ) const;
