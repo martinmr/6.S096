@@ -5,7 +5,7 @@
 #include <iomanip>
 
 namespace nbody {
-
+  
   std::istream& operator>>( std::istream &is, Body &body ) {
     is >> body._position >> body._velocity >> body._force >> body._mass;
     return is;
