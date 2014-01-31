@@ -14,6 +14,7 @@ DEV_DIR := .
 BUILD_DIR := $(DEV_DIR)/build
 INSTALL_DIR := $(DEV_DIR)/install
 GTEST_DIR := $(DEV_DIR)/third_party/gtest
+GLLOAD_DIR := $(DEV_DIR)/third_party/glsdk/glload
 
 ## The compilers and programs to use
 SHELL := /bin/sh
@@ -31,6 +32,7 @@ MKDIR := mkdir -p
 
 ## Directories to include headers from
 INCLUDE_FLAGS := -I$(INSTALL_DIR)/include \
+								 -I$(GLLOAD_DIR)/include \
 								 -I$(GTEST_DIR)/include \
 								 -I$(GTEST_DIR)
 
