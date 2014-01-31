@@ -22,7 +22,7 @@ endif
 ifeq ($(config),debug)
   OBJDIR     = Debug
   TARGETDIR  = lib
-  TARGET     = $(TARGETDIR)/libglloadD.a
+  TARGET     = $(TARGETDIR)/libglload.a
   DEFINES   += -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS -DLOAD_X11 -DDEBUG -D_DEBUG -DMEMORY_DEBUGGING
   INCLUDES  += -Iinclude -Isource
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
