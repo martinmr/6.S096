@@ -88,6 +88,10 @@ namespace nbody {
         }
     }
 
+    void System::computeGravitation( size_t nThreads ) {
+      nThreads += 1;
+    }
+
     void System::integrateSystem( float dt ) {
         _integrator.integrateSystem(*this,  dt);
     }
