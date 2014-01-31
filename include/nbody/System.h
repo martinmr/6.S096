@@ -19,13 +19,15 @@ namespace nbody {
         System() = delete;
         System( const System &sys ) = delete;
         System& operator=( const System &sys ) = delete;
-        public:
+    public:
         System( size_t N , Integrator integrator) : _nBodies{N}, _body{ new Body[N] }, _integrator{integrator} { initRandomState(); }
         System( std::istream &input, Integrator integrator ) : _nBodies{}, _body{nullptr}, _integrator{integrator} { readState( input ); }
         System( std::string filename, Integrator integrator ) : _nBodies{}, _body{nullptr}, _integrator{integrator}  { readState( filename ); }
         ~System() { delete [] _body; }
+
         Body& body( size_t index );
         Body body( size_t index ) const;
+
         size_t nBodies() const;
         float dampingFactor() const;
         void interactBodies( size_t i, size_t j, float softFactor, Vector3f &acc ) const;
