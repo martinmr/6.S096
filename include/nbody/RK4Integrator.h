@@ -20,7 +20,7 @@ namespace nbody {
     */
     class RK4Integrator : public Integrator {
     public:
-        void integrateSystem( System &s, float dt ) const;
+        void integrateSystem( System &s, float dt );
         System* compute_k1( System &s, float dt );
         System* compute_k2( System &s, System *k1, float dt );
         System* compute_k3( System &s, System *k2, float dt );
