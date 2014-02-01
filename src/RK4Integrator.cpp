@@ -64,7 +64,7 @@ namespace nbody {
       a = k2->body(i).force();
 
       k3->body(i).position() = rs + ( v * dt );
-      k3->body(i).velocity() = ( vs + a * dt ) * ( (float) ) s.dampingFactor() );
+      k3->body(i).velocity() = ( vs + a * dt ) * ( (float)  s.dampingFactor() );
     }
     k3->computeGravitation();
     return k3;
@@ -88,7 +88,7 @@ namespace nbody {
     return k4;
   }
 
-  void RK4Integrator::integrateSystem( System &s, float dt ) const{
+  void RK4Integrator::integrateSystem( System &s, float dt ) {
     Vector3f dr, dv;
     // compute increments
     System *k1 = compute_k1( s, dt );
@@ -107,8 +107,8 @@ namespace nbody {
             2.0f * ( k3->body(i).velocity() - s.body(i).velocity() ) +
             ( k4->body(i).velocity() - s.body(i).velocity() );
 
-      s.body(i).position() += dr / 6.0f;
-      s.body(i).velocity() += dv / 6.0f;
+      s.body(i).position() =  s.body(i).position() + dr / 6.0f;
+      s.body(i).velocity() = s.body(i).velocity() + dv / 6.0f;
     }
     delete k1;
     delete k2;
