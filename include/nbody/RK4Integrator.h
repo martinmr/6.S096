@@ -3,7 +3,6 @@
 
 #include <nbody/Integrator.h>
 #include <nbody/System.h>
-typedef System* SystemPtr;
 
 namespace nbody {
     /* Runge-Kutta method of solving differential equation:

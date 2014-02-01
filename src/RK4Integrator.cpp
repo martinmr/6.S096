@@ -18,7 +18,7 @@ namespace nbody {
    */
   System* RK4Integrator::compute_k1( System &s, float dt ) {
     Vector3f rs, vs, v, a;
-    SimpleIntergator *si = SimpleIntegrator();
+    SimpleIntegrator *si = new SimpleIntegrator();
     System *k1 = new System( s.nBodies(), si );
     // computing k_1 * dt/2
     for( size_t i = 0; i < s.nBodies(); ++i ) {
@@ -36,7 +36,7 @@ namespace nbody {
 
   System* RK4Integrator::compute_k2( System &s, System *k1, float dt ) {
     Vector3f rs, vs, v, a;
-    SimpleIntergator *si = SimpleIntegrator();
+    SimpleIntegrator *si = new SimpleIntegrator();
     System *k2 = new System( s.nBodies(), si );
     // computing k_2 * dt/2
     for( size_t i = 0; i < s.nBodies(); ++i ) {
@@ -54,7 +54,7 @@ namespace nbody {
 
   System* RK4Integrator::compute_k3( System &s, System *k2, float dt ) {
     Vector3f rs, vs, v, a;
-    SimpleIntergator *si = SimpleIntegrator();
+    SimpleIntegrator *si = new SimpleIntegrator();
     System *k3 = new System( s.nBodies(), si );
     // computing k_3 * dt
     for( size_t i = 0; i < s.nBodies(); ++i ) {
@@ -73,7 +73,7 @@ namespace nbody {
 
   System* RK4Integrator::compute_k4( System &s, System *k3, float dt ) {
     Vector3f rs, vs, v, a;
-    SimpleIntergator *si = SimpleIntegrator();
+    SimpleIntegrator *si = new SimpleIntegrator();
     System *k4 = new System( s.nBodies(), si );
     // computing k_4 * dt
     for( size_t i = 0; i < s.nBodies(); ++i ) {
