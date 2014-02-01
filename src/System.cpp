@@ -73,4 +73,20 @@ namespace nbody {
         }
     }
 
+    void System::initRandomState() {
+	for (size_t i = 0; i < nBodies(); ++i ) {
+
+            Vector3f r{1.0f*i, 1.0f*i, 1.0f*i};
+            Vector3f v{1, 1, 1};     
+            Vector3f a{0, 0, 0}; 
+
+	    _body[i].position() = r;
+            _body[i].velocity() = v;
+            _body[i].force() = a;
+     	    _body[i].mass() = 1;
+	}
+
+    }
+
+
 } // namespace nbody

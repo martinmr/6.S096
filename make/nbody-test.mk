@@ -21,6 +21,13 @@ OBJECTS_PROJ_TEST := \
 	$(BUILD_DIR_PROJ_TEST)/$(PROJ_NAME)-test.o \
 	$(BUILD_DIR_PROJ_TEST)/vectorTest.o \
 	$(BUILD_DIR_PROJ_TEST)/vectorTest2.o \
+	$(BUILD_DIR_PROJ_TEST)/bodyTest.o \
+	$(BUILD_DIR_PROJ_TEST)/intbodiesTest.o \
+	$(BUILD_DIR_PROJ_TEST)/compgravTest.o \
+	$(BUILD_DIR_PROJ_TEST)/compgrav2Test.o \
+	$(BUILD_DIR_PROJ_TEST)/simpleintegratorTest.o \
+	$(BUILD_DIR_PROJ_TEST)/updateTest.o \
+	#$(BUILD_DIR_PROJ_TEST)/intbodiesTest.o \
 	#$(BUILD_DIR_PROJ_TEST)/add-more.o \
 	#$(BUILD_DIR_PROJ_TEST)/unit-tests.o \
 	#$(BUILD_DIR_PROJ_TEST)/right-here!.o \

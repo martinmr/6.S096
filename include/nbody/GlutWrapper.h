@@ -43,7 +43,7 @@ namespace nbody {
         GlutWrapper( const std::string &title );
         GlutWrapper( const std::string &title, 
                 Mode debugMode = Mode::NDEBUG );
-        ~GlutWrapper();
+        virtual ~GlutWrapper();
 
         void init( int argc, char **argv, int theWidth, int theHeight, Shaders *shaders, size_t bufSize = 0, float *buf = nullptr );
         void createWindow();

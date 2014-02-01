@@ -14,7 +14,7 @@ namespace nbody {
     float _mass;
   public:
     Body() : _position{}, _velocity{}, _force{}, _mass{} {}
-    //Body(Vector3f position_, Vector3f velocity_, Vector3f force_, float mass_) : _position{position_}, _velocity{velocity_}, _force{force_}, _mass{mass_} {}
+    Body(Vector3f position_, Vector3f velocity_, Vector3f force_, float mass_) : _position{position_}, _velocity{velocity_}, _force{force_}, _mass{mass_} {} // this constructor is used for unit testing purposes
     inline Vector3f position() const { return _position; }
     inline Vector3f& position() { return _position; }
     inline Vector3f velocity() const { return _velocity; }
@@ -22,6 +22,7 @@ namespace nbody {
     inline Vector3f force() const { return _force; }
     inline Vector3f& force() { return _force; }
     inline float mass() const { return _mass; }
+    inline float& mass() {return _mass;} // added to help with unit testing
     friend std::istream& operator>>( std::istream &is, Body &body );
     friend std::ostream& operator<<( std::ostream &os, const Body &body );
   };
