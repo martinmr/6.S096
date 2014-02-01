@@ -3,6 +3,7 @@
 #include <nbody/Window.h>
 #include <nbody/Vector3.h>
 #include <nbody/SimpleIntegrator.h>
+#include <nbody/RK4Integrator.h>
 #include <nbody/Simulation.h>
 
 #include <glload/gl_3_0.h>
@@ -38,7 +39,7 @@ namespace nbody {
         if( _system != nullptr ) {
             throw std::runtime_error( "Tried to attach new system to running simulation!" );
         } else {
-            SimpleIntegrator *integrator = new SimpleIntegrator();
+            RK4Integrator *integrator = new RK4Integrator();
             _system = new System{input, integrator};
         }
     }
