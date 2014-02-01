@@ -28,7 +28,7 @@ namespace nbody {
       a = s.body(i).force();
 
       k1->body(i).position() = rs + ( v * dt / 2.0f );
-      k1->body(i).velocity() = ( vs + a * dt / 2.0f ) * sqrt( s.dampingFactor() );
+      k1->body(i).velocity() = ( vs + a * dt / 2.0f ) * ( ( float ) sqrt( s.dampingFactor() ) );
     }
     k1->computeGravitation();
     return k1;
@@ -46,7 +46,7 @@ namespace nbody {
       a = k1->body(i).force();
 
       k2->body(i).position() = rs + ( v * dt / 2.0f );
-      k2->body(i).velocity() = ( vs + a * dt / 2.0f ) * sqrt( s.dampingFactor() );
+      k2->body(i).velocity() = ( vs + a * dt / 2.0f ) * ( ( float ) sqrt( s.dampingFactor() ) );
     }
     k2->computeGravitation();
     return k2;
@@ -64,7 +64,7 @@ namespace nbody {
       a = k2->body(i).force();
 
       k3->body(i).position() = rs + ( v * dt );
-      k3->body(i).velocity() = ( vs + a * dt ) * s.dampingFactor();
+      k3->body(i).velocity() = ( vs + a * dt ) * ( (float) ) s.dampingFactor() );
     }
     k3->computeGravitation();
     return k3;
