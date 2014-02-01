@@ -3,12 +3,12 @@
 #include <iostream>
 #include <fstream>
 
-int main() {
+int main(int argc, char * argv) {
   try {
-    std::ifstream input{ "resources/nbody/binary-system-simple.txt" };
+    std::ifstream input{ "resources/nbody/system.txt" };
     nbody::Simulation sim{};
     sim.loadRun(input);
-    sim.evolveSystem( 1e4, 0.001 );
+    sim.evolveSystem( 1e4, 0.000001 );
     sim.saveRun();
     return 0;
   } catch( const std::exception &e ) {
