@@ -1,4 +1,5 @@
 #include <nbody/RK4Integrator.h>
+#include <nbody/SimpleIntegrator.h>
 #include <nbody/System.h>
 #include <nbody/Vector3.h>
 #include <cmath>
@@ -17,7 +18,8 @@ namespace nbody {
    */
   System* RK4Integrator::compute_k1( System &s, float dt ) {
     Vector3f rs, vs, v, a;
-    System *k1 = new System( s.nBodies(), SimpleIntegrator );
+    SimpleIntergator *si = SimpleIntegrator();
+    System *k1 = new System( s.nBodies(), si );
     // computing k_1 * dt/2
     for( size_t i = 0; i < s.nBodies(); ++i ) {
       rs = s.body(i).position();
@@ -34,7 +36,8 @@ namespace nbody {
 
   System* RK4Integrator::compute_k2( System &s, System *k1, float dt ) {
     Vector3f rs, vs, v, a;
-    System *k2 = new System( s.nBodies(), SimpleIntegrator );
+    SimpleIntergator *si = SimpleIntegrator();
+    System *k2 = new System( s.nBodies(), si );
     // computing k_2 * dt/2
     for( size_t i = 0; i < s.nBodies(); ++i ) {
       rs = s.body(i).position();
@@ -51,7 +54,8 @@ namespace nbody {
 
   System* RK4Integrator::compute_k3( System &s, System *k2, float dt ) {
     Vector3f rs, vs, v, a;
-    System *k3 = new System( s.nBodies(), SimpleIntegrator );
+    SimpleIntergator *si = SimpleIntegrator();
+    System *k3 = new System( s.nBodies(), si );
     // computing k_3 * dt
     for( size_t i = 0; i < s.nBodies(); ++i ) {
       rs = s.body(i).position();
@@ -69,7 +73,8 @@ namespace nbody {
 
   System* RK4Integrator::compute_k4( System &s, System *k3, float dt ) {
     Vector3f rs, vs, v, a;
-    System *k4 = new System( s.nBodies(), SimpleIntegrator );
+    SimpleIntergator *si = SimpleIntegrator();
+    System *k4 = new System( s.nBodies(), si );
     // computing k_4 * dt
     for( size_t i = 0; i < s.nBodies(); ++i ) {
       rs = s.body(i).position();
