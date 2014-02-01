@@ -1,6 +1,16 @@
+#include <nbody/GlutWrapper.h>
+#include <nbody/Shaders.h>
+#include <nbody/Window.h>
+#include <nbody/Vector3.h>
 #include <nbody/SimpleIntegrator.h>
+#include <nbody/RK4Integrator.h>
 #include <nbody/Simulation.h>
 
+#include <glload/gl_3_0.h>
+#include <glload/gll.hpp>
+#include <GL/freeglut.h>
+
+#include <iostream>
 #include <sstream>
 #include <chrono>
 #include <stdexcept>
@@ -29,16 +39,33 @@ namespace nbody {
         if( _system != nullptr ) {
             throw std::runtime_error( "Tried to attach new system to running simulation!" );
         } else {
-            Integrator integrator = SimpleIntegrator();
+            RK4Integrator *integrator = new RK4Integrator();
             _system = new System{input, integrator};
         }
     }
 
     void Simulation::evolveSystem( int nSteps, float dt ) {
         if( _system != nullptr ) {
-            for( int step = 0; step < nSteps; ++step ) {
-                _system->update( dt );
+            size_t N = _system->nBodies(); 
+            size_t bufSize = (4 * N);
+            _buf = new float[bufSize];
+            for( size_t i = 0; i < N; ++i ) {
+                Vector3f position = _system->body( i ).position();
+                _buf[4*i] = position.x();
+                _buf[4*i+1] = position.y();
+                _buf[4*i+2] = position.z();
+                _buf[4*i+3] = 1.0f;
             }
+
+            nbody::Shaders shaders;
+            shaders.addToVertexList( nBodyShaders::vertex1 );
+            shaders.addToFragmentList( nBodyShaders::fragment1 );
+            _window = new Window{ "N-Body Simulation", _system, nSteps, dt,
+                         nbody::GlutWrapper::NDEBUG}; 
+            char ** argv = new char *[1];
+            _window->init( 0, argv, 500, 500, &shaders, bufSize, _buf );
+            delete [] argv;
+            _window->run(); 
         } else {
             throw std::runtime_error( "Tried to evolve simulation with no system!" );
         }

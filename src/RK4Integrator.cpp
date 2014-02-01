@@ -1,4 +1,5 @@
 #include <nbody/RK4Integrator.h>
+#include <nbody/SimpleIntegrator.h>
 #include <nbody/System.h>
 #include <nbody/Vector3.h>
 #include <cmath>
@@ -17,7 +18,8 @@ namespace nbody {
    */
   System* RK4Integrator::compute_k1( System &s, float dt ) {
     Vector3f rs, vs, v, a;
-    System *k1 = new System( s.nBodies(), SimpleIntegrator );
+    SimpleIntegrator *si = new SimpleIntegrator();
+    System *k1 = new System( s.nBodies(), si );
     // computing k_1 * dt/2
     for( size_t i = 0; i < s.nBodies(); ++i ) {
       rs = s.body(i).position();
@@ -26,7 +28,7 @@ namespace nbody {
       a = s.body(i).force();
 
       k1->body(i).position() = rs + ( v * dt / 2.0f );
-      k1->body(i).velocity() = ( vs + a * dt / 2.0f ) * sqrt( s.dampingFactor() );
+      k1->body(i).velocity() = ( vs + a * dt / 2.0f ) * ( ( float ) sqrt( s.dampingFactor() ) );
     }
     k1->computeGravitation();
     return k1;
@@ -34,7 +36,8 @@ namespace nbody {
 
   System* RK4Integrator::compute_k2( System &s, System *k1, float dt ) {
     Vector3f rs, vs, v, a;
-    System *k2 = new System( s.nBodies(), SimpleIntegrator );
+    SimpleIntegrator *si = new SimpleIntegrator();
+    System *k2 = new System( s.nBodies(), si );
     // computing k_2 * dt/2
     for( size_t i = 0; i < s.nBodies(); ++i ) {
       rs = s.body(i).position();
@@ -43,7 +46,7 @@ namespace nbody {
       a = k1->body(i).force();
 
       k2->body(i).position() = rs + ( v * dt / 2.0f );
-      k2->body(i).velocity() = ( vs + a * dt / 2.0f ) * sqrt( s.dampingFactor() );
+      k2->body(i).velocity() = ( vs + a * dt / 2.0f ) * ( ( float ) sqrt( s.dampingFactor() ) );
     }
     k2->computeGravitation();
     return k2;
@@ -51,7 +54,8 @@ namespace nbody {
 
   System* RK4Integrator::compute_k3( System &s, System *k2, float dt ) {
     Vector3f rs, vs, v, a;
-    System *k3 = new System( s.nBodies(), SimpleIntegrator );
+    SimpleIntegrator *si = new SimpleIntegrator();
+    System *k3 = new System( s.nBodies(), si );
     // computing k_3 * dt
     for( size_t i = 0; i < s.nBodies(); ++i ) {
       rs = s.body(i).position();
@@ -60,7 +64,7 @@ namespace nbody {
       a = k2->body(i).force();
 
       k3->body(i).position() = rs + ( v * dt );
-      k3->body(i).velocity() = ( vs + a * dt ) * s.dampingFactor();
+      k3->body(i).velocity() = ( vs + a * dt ) * ( (float)  s.dampingFactor() );
     }
     k3->computeGravitation();
     return k3;
@@ -69,7 +73,8 @@ namespace nbody {
 
   System* RK4Integrator::compute_k4( System &s, System *k3, float dt ) {
     Vector3f rs, vs, v, a;
-    System *k4 = new System( s.nBodies(), SimpleIntegrator );
+    SimpleIntegrator *si = new SimpleIntegrator();
+    System *k4 = new System( s.nBodies(), si );
     // computing k_4 * dt
     for( size_t i = 0; i < s.nBodies(); ++i ) {
       rs = s.body(i).position();
@@ -83,7 +88,7 @@ namespace nbody {
     return k4;
   }
 
-  void RK4Integrator::integrateSystem( System &s, float dt ) const{
+  void RK4Integrator::integrateSystem( System &s, float dt ) {
     Vector3f dr, dv;
     // compute increments
     System *k1 = compute_k1( s, dt );
@@ -102,8 +107,8 @@ namespace nbody {
             2.0f * ( k3->body(i).velocity() - s.body(i).velocity() ) +
             ( k4->body(i).velocity() - s.body(i).velocity() );
 
-      s.body(i).position() += dr / 6.0f;
-      s.body(i).velocity() += dv / 6.0f;
+      s.body(i).position() =  s.body(i).position() + dr / 6.0f;
+      s.body(i).velocity() = s.body(i).velocity() + dv / 6.0f;
     }
     delete k1;
     delete k2;

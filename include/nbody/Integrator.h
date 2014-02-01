@@ -2,7 +2,7 @@
 #define _NBODY_INTEGRATOR_H
 
 #include <nbody/Vector3.h>
-
+#include <iostream>
 namespace nbody {
     
     class System;
@@ -13,7 +13,7 @@ namespace nbody {
     public:
         Integrator() {}
         virtual ~Integrator() {}
-        virtual void integrateSystem( System &s, float dt ) const { (void)s; (void)dt; } 
+        virtual void integrateSystem( System &s, float dt ) = 0; 
     };
 
 } //namespace nbody

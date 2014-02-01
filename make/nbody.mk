@@ -21,6 +21,11 @@ OBJECTS_PROJ := \
 	$(BUILD_DIR_PROJ)/constants.o \
 	$(BUILD_DIR_PROJ)/Integrator.o \
 	$(BUILD_DIR_PROJ)/SimpleIntegrator.o \
+	$(BUILD_DIR_PROJ)/RK4Integrator.o \
+	$(BUILD_DIR_PROJ)/Shaders.o \
+	$(BUILD_DIR_PROJ)/GlutWrapper.o \
+	$(BUILD_DIR_PROJ)/Window.o \
+	#$(BUILD_DIR_PROJ)/SimpleIntegrator.o \
 	#$(BUILD_DIR_PROJ)/add.o \
 	#$(BUILD_DIR_PROJ)/any.o \
 	#$(BUILD_DIR_PROJ)/other.o \
