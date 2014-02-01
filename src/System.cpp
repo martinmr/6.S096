@@ -47,7 +47,7 @@ namespace nbody {
     }
 
     void System::integrateSystem( float dt ) {
-        _integrator.integrateSystem(*this,  dt);
+        _integrator->integrateSystem(*this,  dt);
     }
 
     void System::update( float dt ) {

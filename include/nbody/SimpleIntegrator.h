@@ -6,9 +6,11 @@
 
 namespace nbody {
     
+    class System;
+    
     class SimpleIntegrator : public Integrator {
     public:
-        void integrateSystem( System &s, float dt ) const;
+        void integrateSystem( System &s, float dt );
     };
 
 }

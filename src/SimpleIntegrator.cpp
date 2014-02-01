@@ -2,9 +2,11 @@
 #include <nbody/System.h>
 #include <nbody/Vector3.h>
 
+#include <iostream>
+
 namespace nbody {
 
-    void SimpleIntegrator::integrateSystem( System &s, float dt ) const{
+    void SimpleIntegrator::integrateSystem( System &s, float dt ) { 
         Vector3f r, v, a;
         for( size_t i = 0; i < s.nBodies(); ++i ) {
             r = s.body(i).position();

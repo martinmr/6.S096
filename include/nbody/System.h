@@ -1,7 +1,7 @@
 #ifndef _NBODY_SYSTEM_H
 #define _NBODY_SYSTEM_H
 
-#include <nbody/Integrator.h>
+#include <nbody/SimpleIntegrator.h>
 #include <nbody/Vector3.h>
 #include <nbody/Body.h>
 
@@ -9,20 +9,21 @@
 #include <string>
 
 namespace nbody {
-
+    class SimpleIntegrator;
+    
     class System {
         size_t _nBodies;
         Body *_body;
-        Integrator _integrator;
+        SimpleIntegrator *_integrator;
         float _softFactor = 1e-9f;
         float _dampingFactor = 1.0f;
         System() = delete;
         System( const System &sys ) = delete;
         System& operator=( const System &sys ) = delete;
     public:
-        System( size_t N , Integrator integrator) : _nBodies{N}, _body{ new Body[N] }, _integrator{integrator} { initRandomState(); }
-        System( std::istream &input, Integrator integrator ) : _nBodies{}, _body{nullptr}, _integrator{integrator} { readState( input ); }
-        System( std::string filename, Integrator integrator ) : _nBodies{}, _body{nullptr}, _integrator{integrator}  { readState( filename ); }
+        System( size_t N , SimpleIntegrator *integrator) : _nBodies{N}, _body{ new Body[N] }, _integrator{integrator} { initRandomState(); }
+        System( std::istream &input, SimpleIntegrator *integrator ) : _nBodies{}, _body{nullptr}, _integrator{integrator} { readState( input ); }
+        System( std::string filename, SimpleIntegrator *integrator ) : _nBodies{}, _body{nullptr}, _integrator{integrator}  { readState( filename ); }
         ~System() { delete [] _body; }
 
         Body& body( size_t index );
